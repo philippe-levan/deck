@@ -45,6 +45,15 @@ app.controller('BoardController', function ($rootScope, $scope, $stateParams, St
 	$scope.deletedCards = {};
 	$scope.deletedStacks = {};
 
+	$scope.$watch(function() {
+		return $state.current;
+	}, function(currentState) {
+		if(currentState.name === 'board.detail') {
+			$scope.loadDeletedEntity(CardService, 'deletedCards');
+			$scope.loadDeletedEntity(StackService, 'deletedStacks');
+		}
+	});
+
 	// workaround for $stateParams changes not being propagated
 	$scope.$watch(function() {
 		return $state.params;
@@ -265,7 +274,6 @@ app.controller('BoardController', function ($rootScope, $scope, $stateParams, St
 		// TODO: remove from cards
 	};
 	$scope.labelCreate = function (label) {
-		alert(label);
 		label.boardId = $scope.id;
 		LabelService.create(label).then(function (data) {
 			$scope.newStack.title = '';
@@ -413,7 +421,4 @@ app.controller('BoardController', function ($rootScope, $scope, $stateParams, St
 		}
 		return card.attachmentCount;
 	};
-
-	$scope.loadDeletedEntity(CardService, 'deletedCards');
-	$scope.loadDeletedEntity(StackService, 'deletedStacks');
 });

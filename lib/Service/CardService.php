@@ -314,6 +314,7 @@ class CardService {
 	 * @throws \OCA\Deck\NoPermissionException
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+	 * @throws BadRequestException
 	 */
 	public function assignLabel($cardId, $labelId) {
 
@@ -379,8 +380,8 @@ class CardService {
 			throw new BadRequestException('card id must be a number');
 		}
 
-		if (is_numeric($userId) === false) {
-			throw new BadRequestException('user id must be a number');
+		if ($userId === false || $userId === null) {
+			throw new BadRequestException('user id must be provided');
 		}
 
 		$assignments = $this->assignedUsersMapper->find($cardId);
@@ -410,8 +411,8 @@ class CardService {
 			throw new BadRequestException('card id must be a number');
 		}
 
-		if (is_numeric($userId) === false) {
-			throw new BadRequestException('user id must be a number');
+		if ($userId === false || $userId === null) {
+			throw new BadRequestException('user must be provided');
 		}
 
 		$assignments = $this->assignedUsersMapper->find($cardId);

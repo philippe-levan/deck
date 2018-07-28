@@ -24,14 +24,19 @@ import app from '../app/App.js';
 /** global: oc_defaults */
 app.factory('ApiService', function ($http, $q) {
 	var ApiService = function (http, endpoint) {
+		// Consider renaming endpoint to resource
 		this.endpoint = endpoint;
-		this.baseUrl = OC.generateUrl('/apps/deck/' + endpoint);
+		this.baseUrl = this.generateUrl(this.endpoint);
 		this.http = http;
 		this.q = $q;
 		this.data = {};
 		this.deleted = {};
 		this.id = null;
 		this.sorted = [];
+	};
+
+	ApiService.prototype.generateUrl = function(path) {
+		return OC.generateUrl('/apps/deck/' + path);
 	};
 
 	ApiService.prototype.fetchAll = function () {
@@ -52,7 +57,7 @@ app.factory('ApiService', function ($http, $q) {
 	ApiService.prototype.fetchDeleted = function (scopeId) {
 		var deferred = $q.defer();
 		var self = this;
-		$http.get(this.baseUrl + '/deleted/' + scopeId).then(function (response) {
+		$http.get(this.generateUrl(scopeId + '/' + this.endpoint + '/deleted')).then(function (response) {
 			var objects = response.data;
 			objects.forEach(function (obj) {
 				self.deleted[obj.id] = obj;

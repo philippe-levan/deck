@@ -75,8 +75,8 @@ class StackServiceTest extends TestCase {
 
 		$this->stackService = new StackService(
 			$this->stackMapper,
-            $this->boardMapper,
             $this->cardMapper,
+            $this->boardMapper,
             $this->labelMapper,
 			$this->permissionService,
 			$this->boardService,

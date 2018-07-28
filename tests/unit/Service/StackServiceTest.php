@@ -28,6 +28,7 @@ namespace OCA\Deck\Service;
 use OCA\Deck\Db\AssignedUsersMapper;
 use OCA\Deck\Db\Card;
 use OCA\Deck\Db\CardMapper;
+use OCA\Deck\Db\BoardMapper;
 use OCA\Deck\Db\Label;
 use OCA\Deck\Db\LabelMapper;
 use OCA\Deck\Db\Stack;
@@ -48,7 +49,9 @@ class StackServiceTest extends TestCase {
 	private $stackMapper;
     /** @var \PHPUnit\Framework\MockObject\MockObject|CardMapper */
 	private $cardMapper;
-    /** @var \PHPUnit\Framework\MockObject\MockObject|LabelMapper */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|BoardMapper */
+	private $boardMapper;
+    /** @var \PHPUnit\Framework\MockObject\MockObject|CardMapper */
 	private $labelMapper;
     /** @var \PHPUnit\Framework\MockObject\MockObject|PermissionService */
 	private $permissionService;
@@ -63,6 +66,7 @@ class StackServiceTest extends TestCase {
 		parent::setUp();
 		$this->stackMapper = $this->createMock(StackMapper::class);
 		$this->cardMapper = $this->createMock(CardMapper::class);
+		$this->boardMapper = $this->createMock(BoardMapper::class);
 		$this->labelMapper = $this->createMock(LabelMapper::class);
 		$this->permissionService = $this->createMock(PermissionService::class);
 		$this->boardService = $this->createMock(BoardService::class);
@@ -71,6 +75,7 @@ class StackServiceTest extends TestCase {
 
 		$this->stackService = new StackService(
 			$this->stackMapper,
+            $this->boardMapper,
             $this->cardMapper,
             $this->labelMapper,
 			$this->permissionService,

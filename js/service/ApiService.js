@@ -39,6 +39,12 @@ app.factory('ApiService', function ($http, $q) {
 		return OC.generateUrl('/apps/deck/' + path);
 	};
 
+	ApiService.prototype.tryAllThenDeleted = function(id) {
+		let object = this.data[id];
+		if (object === undefined) object = this.deleted[id];
+		return object;
+	};
+
 	ApiService.prototype.fetchAll = function () {
 		var deferred = $q.defer();
 		var self = this;

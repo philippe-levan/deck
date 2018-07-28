@@ -139,7 +139,7 @@
     	   <li class='board-detail__deleted-list__item' ng-repeat="deletedCard in cardservice.deleted">
             <span class="icon icon-deck"></span>
     			  <span>{{deletedCard.title}}</span>
-    			  <span>{{stackservice.data[deletedCard.stackId].title}}</span>
+    			  <span>{{stackservice.tryAllThenDeleted(deletedCard.stackId).title}}</span>
     			  <span>{{deletedCard.deletedAt}}</span>
         	  <a ng-click="cardUndoDelete(deletedCard)">
               <span class="icon icon-history"></span>

@@ -178,7 +178,7 @@ class StackServiceTest extends TestCase {
         $stack->setTitle('Foo');
         $stack->setBoardId(2);
         $stack->setOrder(1);
-        $result = $this->stackService->update(123, 'Foo', 2, 1);
+        $result = $this->stackService->update(123, 'Foo', 2, 1, null);
         $this->assertEquals($stack, $result);
     }
 

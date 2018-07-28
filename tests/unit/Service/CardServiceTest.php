@@ -52,11 +52,12 @@ class CardServiceTest extends TestCase {
 		parent::setUp();
         $this->cardMapper = $this->createMock(CardMapper::class);
         $this->stackMapper = $this->createMock(StackMapper::class);
+        $this->boardMapper = $this->createMock(BoardMapper::class);
         $this->permissionService = $this->createMock(PermissionService::class);
         $this->boardService = $this->createMock(BoardService::class);
         $this->assignedUsersMapper = $this->createMock(AssignedUsersMapper::class);
 		$this->attachmentService = $this->createMock(AttachmentService::class);
-        $this->cardService = new CardService($this->cardMapper, $this->stackMapper, $this->permissionService, $this->boardService, $this->assignedUsersMapper, $this->attachmentService);
+        $this->cardService = new CardService($this->cardMapper, $this->stackMapper, $this->boardMapper, $this->permissionService, $this->boardService, $this->assignedUsersMapper, $this->attachmentService);
     }
 
     public function testFind() {

@@ -51,7 +51,7 @@ class StackServiceTest extends TestCase {
 	private $cardMapper;
     /** @var \PHPUnit\Framework\MockObject\MockObject|BoardMapper */
 	private $boardMapper;
-    /** @var \PHPUnit\Framework\MockObject\MockObject|CardMapper */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|LabelMapper */
 	private $labelMapper;
     /** @var \PHPUnit\Framework\MockObject\MockObject|PermissionService */
 	private $permissionService;
@@ -75,9 +75,10 @@ class StackServiceTest extends TestCase {
 
 		$this->stackService = new StackService(
 			$this->stackMapper,
-            $this->cardMapper,
-            $this->boardMapper,
-            $this->labelMapper,
+      $this->boardMapper,
+      $this->cardMapper,
+      $this->labelMapper,
+
 			$this->permissionService,
 			$this->boardService,
 			$this->assignedUsersMapper,
